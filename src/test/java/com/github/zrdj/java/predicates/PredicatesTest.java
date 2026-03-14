@@ -6,10 +6,10 @@ import com.github.zrdj.java.predicates.primitives.StringPredicates;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.jusecase.Builders.*;
 
 public class PredicatesTest {
     private final Predicates well = new Predicates.Default();
@@ -41,8 +41,8 @@ public class PredicatesTest {
                 .and(it.isNotEmpty())
                 .and(it.containsAnyOf("one", "two"))
                 .and(it.containsNoneOf("three", "four")))
-                .accepts(a(list(of("one", "five", "ten"))))
-                .rejects(null, a(list(of("one", "five", "ten", "four"))));
+                .accepts(List.of("one", "five", "ten"))
+                .rejects(null, List.of("one", "five", "ten", "four"));
     }
 
     @Test
