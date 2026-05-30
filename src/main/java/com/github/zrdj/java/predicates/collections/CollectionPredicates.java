@@ -85,7 +85,7 @@ public interface CollectionPredicates {
 
         @Override
         public <T> Predicate<Collection<T>> containsAllOf(T[] elements) {
-            return outer -> containsAllOf(Arrays.asList((T[]) elements)).test(outer);
+            return outer -> containsAllOf(Arrays.asList(elements)).test(outer);
         }
 
         @Override
@@ -95,7 +95,7 @@ public interface CollectionPredicates {
 
         @Override
         public <T> Predicate<Collection<T>> containsAnyOf(T[] elements) {
-            return outer -> containsAnyOf(Arrays.asList((T[]) elements)).test(outer);
+            return outer -> containsAnyOf(Arrays.asList(elements)).test(outer);
         }
 
         @Override
@@ -105,7 +105,7 @@ public interface CollectionPredicates {
 
         @Override
         public <T> Predicate<Collection<T>> containsNoneOf(T[] elements) {
-            return outer -> containsNoneOf(Arrays.asList((T[]) elements)).test(outer);
+            return outer -> containsNoneOf(Arrays.asList(elements)).test(outer);
         }
 
         @Override

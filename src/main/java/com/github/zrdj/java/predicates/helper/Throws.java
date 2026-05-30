@@ -1,6 +1,8 @@
 package com.github.zrdj.java.predicates.helper;
 
-public abstract class Throws {
+public final class Throws {
+    private Throws() {}
+
     public static boolean exception(final Action action) {
         try {
             action.execute();
