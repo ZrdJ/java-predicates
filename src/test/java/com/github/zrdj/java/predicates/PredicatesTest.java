@@ -1,6 +1,8 @@
 package com.github.zrdj.java.predicates;
 
+import com.github.zrdj.java.predicates.collections.ArrayPredicates;
 import com.github.zrdj.java.predicates.collections.CollectionPredicates;
+import com.github.zrdj.java.predicates.objects.ObjectPredicates;
 import com.github.zrdj.java.predicates.primitives.IntegerPredicates;
 import com.github.zrdj.java.predicates.primitives.StringPredicates;
 import org.assertj.core.api.Assertions;
@@ -14,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PredicatesTest {
     private final Predicates well = new Predicates.Default();
 
+    // [impl->req~predicates-facade.fluent-noop-words~1]
     @Test
     public void testFluentIntegerPredicate() {
         final IntegerPredicates it = well.integer();
@@ -24,6 +27,7 @@ public class PredicatesTest {
                 .rejects(5, 7);
     }
 
+    // [impl->req~predicates-facade.fluent-noop-words~1]
     @Test
     public void testFluentStringPredicate() {
         final StringPredicates it = well.string();
@@ -34,6 +38,7 @@ public class PredicatesTest {
                 .rejects("onetwo");
     }
 
+    // [impl->req~predicates-facade.fluent-noop-words~1]
     @Test
     public void testFluentCollectionPredicate() {
         final CollectionPredicates it = well.collection();
@@ -45,6 +50,7 @@ public class PredicatesTest {
                 .rejects(null, List.of("one", "five", "ten", "four"));
     }
 
+    // [impl->req~predicates-facade.batch-matching~1]
     @Test
     public void testChainingPredicates() {
         final Predicate<String> spec = well.let().string().startsWith("a");
@@ -57,5 +63,27 @@ public class PredicatesTest {
                 .isFalse();
 
 
+    }
+
+    // [impl->req~predicates-facade.default-wiring~1]
+    @Test
+    public void testDefaultWiring() {
+        final Predicates checking = new Predicates.Default();
+        assertThat(checking.string()).isInstanceOf(StringPredicates.Default.class);
+        assertThat(checking.integer()).isInstanceOf(IntegerPredicates.Default.class);
+        assertThat(checking.array()).isInstanceOf(ArrayPredicates.Default.class);
+        assertThat(checking.object()).isInstanceOf(ObjectPredicates.Default.class);
+        assertThat(checking.collection()).isInstanceOf(CollectionPredicates.Default.class);
+    }
+
+    // [impl->req~predicates-facade.fluent-noop-words~1]
+    @Test
+    public void testChainingWordsReturnSameInstance() {
+        assertThat(well.let()).isSameAs(well);
+        assertThat(well.ensure()).isSameAs(well);
+        assertThat(well.check()).isSameAs(well);
+        assertThat(well.that()).isSameAs(well);
+        assertThat(well.when()).isSameAs(well);
+        assertThat(well.valid()).isSameAs(well);
     }
 }

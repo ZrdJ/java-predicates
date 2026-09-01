@@ -15,12 +15,14 @@ public abstract class AbstractObjectPredicatesTestcase {
 
     protected abstract ObjectPredicates provideObjectPredicates();
 
+    // [impl->req~predicates-facade.generic-nullness~1]
     @Test
     public void testIsNull() {
         assertThat(checking.isNull().test(null)).isTrue();
         assertThat(checking.isNull().test(new Object())).isFalse();
     }
 
+    // [impl->req~predicates-facade.generic-nullness~1]
     @Test
     public void testIsNotNull() {
         assertThat(checking.isNotNull().test(null)).isFalse();
