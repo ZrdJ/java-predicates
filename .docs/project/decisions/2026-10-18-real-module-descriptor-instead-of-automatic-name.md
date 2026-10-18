@@ -58,8 +58,11 @@ All five packages are exported:
   this changes how JPMS consumers name the library. The README's dependency snippet follows to
   `0.6.0`.
 - `maven.compiler.source`/`target` stay at `11`. JPMS exists since Java 9, and `maven-compiler-plugin`
-  3.16.0 detects `module-info.java` and compiles it without `<release>`; the tests, which share the
-  root package, compile and run unchanged. No build configuration change beyond the version bump.
+  3.16.0 detects `module-info.java` and compiles it without `<release>`.
+- `maven-surefire-plugin` is pinned to 3.6.0, the version CI's Maven resolves, because with a
+  descriptor surefire 3.x runs the tests on the module path while the dev container's default 2.12.4
+  ran them on the classpath and so hid the failure; on the module path the test-only package
+  `testcases` is opened to JUnit 4 via `--add-opens` in surefire's `argLine`.
 - Classpath consumers are unaffected: a modular jar read from the classpath behaves as before.
 - Consumers on `0.5.2` keep working. This release removes a latent problem; nothing about adopting
   it is urgent.
