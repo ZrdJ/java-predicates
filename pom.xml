@@ -73,7 +73,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.6.1</version>
                 <configuration>
                     <!-- Tests run patched into the module; the test-only package holding the inherited
                          @Test methods is not exported, so JUnit 4 in the unnamed module needs it opened. -->
